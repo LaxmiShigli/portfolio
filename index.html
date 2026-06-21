@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laxmi Shigli — AI/ML Engineer & Data Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FAF6ED;
+    --paper-raised: #FFFEF8;
+    --ink: #2B2410;
+    --ink-soft: #4A3F26;
+    --terracotta: #C98A1F;
+    --terracotta-dark: #9C6A14;
+    --sage: #1F6B66;
+    --taupe: #D9CC9F;
+    --taupe-line: #E3D9BC;
+    --caption: #9A8F6E;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--terracotta); color: var(--paper); }
+
+  a { color: inherit; }
+
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* subtle paper grain */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.025;
+    z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255, 248, 238, 0.88);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--taupe-line);
+  }
+  nav .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+  }
+  .nav-mark {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
+  }
+  .nav-mark span { color: var(--terracotta); }
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+  }
+  .nav-links a {
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 0.2s ease;
+  }
+  .nav-links a:hover { color: var(--terracotta); }
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 100%;
+    bottom: 0;
+    height: 2px;
+    background: var(--terracotta);
+    transition: right 0.25s ease;
+  }
+  .nav-links a.active {
+    color: var(--terracotta-dark);
+    font-weight: 600;
+  }
+  .nav-links a.active::after { right: 0; }
+  @media (max-width: 600px) {
+    .nav-links { gap: 16px; font-size: 0.8rem; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    padding: 88px 0 64px;
+  }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--sage);
+    letter-spacing: 0.02em;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--sage);
+    display: inline-block;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; } 50% { opacity: 0.35; }
+  }
+
+  /* notebook cell */
+  .cell {
+    background: var(--paper-raised);
+    border: 1px solid var(--taupe-line);
+    border-radius: 10px;
+    box-shadow: 0 1px 0 rgba(43,36,16,0.03), 0 12px 28px -18px rgba(43,36,16,0.18);
+    overflow: hidden;
+  }
+  .cell-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--taupe-line);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--caption);
+  }
+  .cell-bar .tl-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--taupe); }
+  .cell-in {
+    padding: 22px 26px 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    color: var(--sage);
+  }
+  .cell-out {
+    padding: 6px 26px 26px;
+  }
+  .typed {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(1.9rem, 5.2vw, 3.1rem);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    min-height: 1.3em;
+  }
+  .typed .cursor {
+    display: inline-block;
+    width: 3px;
+    background: var(--terracotta);
+    margin-left: 2px;
+    animation: blink 0.9s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .hero-sub {
+    margin-top: 18px;
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    max-width: 560px;
+  }
+  .hero-sub b { color: var(--ink); font-weight: 600; }
+
+  .hero-actions {
+    margin-top: 30px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.92rem;
+    padding: 13px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn-primary {
+    background: var(--terracotta);
+    color: var(--paper);
+    box-shadow: 0 6px 16px -6px rgba(201,138,31,0.55);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -6px rgba(201,138,31,0.6); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1.5px solid var(--taupe);
+  }
+  .btn-ghost:hover { border-color: var(--ink); transform: translateY(-2px); }
+
+  /* ---------- SECTION HEADERS ---------- */
+  section { padding: 76px 0; border-top: 1px solid var(--taupe-line); }
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+  .sec-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--terracotta);
+    background: rgba(201,138,31,0.08);
+    padding: 3px 9px;
+    border-radius: 5px;
+    white-space: nowrap;
+  }
+  .sec-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3.4vw, 2rem);
+    letter-spacing: -0.01em;
+  }
+
+  /* ---------- ABOUT / SKILLS ---------- */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  @media (max-width: 600px) { .skills-grid { grid-template-columns: 1fr; } }
+  .skill-card {
+    background: var(--paper-raised);
+    border: 1px solid var(--taupe-line);
+    border-radius: 10px;
+    padding: 18px 20px;
+  }
+  .skill-card h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--sage);
+    margin-bottom: 10px;
+  }
+  .skill-card p { font-size: 0.92rem; color: var(--ink-soft); }
+
+  /* ---------- PROJECTS ---------- */
+  .project {
+    background: var(--paper-raised);
+    border: 1px solid var(--taupe-line);
+    border-radius: 12px;
+    margin-bottom: 22px;
+    overflow: hidden;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .project:hover {
+    box-shadow: 0 16px 32px -20px rgba(43,36,16,0.25);
+    transform: translateY(-2px);
+  }
+  .project-head {
+    padding: 22px 26px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .project-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.3rem;
+  }
+  .project-kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--caption);
+    margin-top: 4px;
+  }
+  .project-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--sage);
+    text-decoration: none;
+    border: 1px solid var(--taupe);
+    padding: 7px 13px;
+    border-radius: 7px;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.15s ease, border-color 0.15s ease;
+  }
+  .project-link:hover { background: rgba(31,107,102,0.08); border-color: var(--sage); }
+  .project-body { padding: 14px 26px 22px; }
+  .project-body ul { padding-left: 20px; color: var(--ink-soft); font-size: 0.94rem; }
+  .project-body li { margin-bottom: 6px; }
+  .tech-row {
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+  .tech-pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    background: rgba(31,107,102,0.07);
+    color: var(--sage);
+    padding: 4px 10px;
+    border-radius: 5px;
+  }
+
+  /* ---------- EXPERIENCE / TIMELINE ---------- */
+  .tl-item {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 18px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--taupe-line);
+  }
+  .tl-item:last-child { border-bottom: none; }
+  .tl-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.76rem;
+    color: var(--caption);
+    padding-top: 3px;
+  }
+  .tl-role { font-weight: 600; font-size: 1rem; }
+  .tl-org { color: var(--terracotta); font-weight: 500; font-size: 0.92rem; }
+  .tl-desc { color: var(--ink-soft); font-size: 0.92rem; margin-top: 6px; }
+  @media (max-width: 560px) {
+    .tl-item { grid-template-columns: 1fr; gap: 4px; }
+  }
+
+  /* ---------- EDUCATION ---------- */
+  .edu-item {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--taupe-line);
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .edu-item:last-child { border-bottom: none; }
+  .edu-name { font-weight: 600; }
+  .edu-degree { color: var(--ink-soft); font-size: 0.92rem; margin-top: 2px; }
+  .edu-meta { text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--caption); white-space: nowrap; }
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  .contact-cell { text-align: center; padding: 56px 0 24px; }
+  .contact-cell .typed-out {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(1.6rem, 4vw, 2.3rem);
+    margin-bottom: 18px;
+  }
+  .contact-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  footer {
+    text-align: center;
+    padding: 30px 0 50px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.76rem;
+    color: var(--caption);
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .dot { animation: none; }
+    .cursor { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-mark">Laxmi <span>Shigli</span></div>
+    <div class="nav-links">
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow"><span class="dot"></span>OPEN TO AI/ML ENGINEER & DATA ANALYST ROLES</div>
+
+    <div class="cell">
+      <div class="cell-bar"><span class="tl-dot"></span><span class="tl-dot"></span><span class="tl-dot"></span>&nbsp;&nbsp;intro.ipynb</div>
+      <div class="cell-in">In [1]: <span style="color:var(--ink-soft)">print(about_me)</span></div>
+      <div class="cell-out">
+        <div class="typed" id="typed-text"></div>
+        <p class="hero-sub">
+          I'm <b>Laxmi</b> — a Computer Science graduate who likes turning messy data into
+          models that actually predict something useful. Python, ML pipelines, and a
+          weakness for finishing the project instead of just prototyping it.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#projects">See the projects →</a>
+          <a class="btn btn-ghost" href="mailto:laxmishigli@gmail.com" id="contact-btn">Get in touch</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap reveal">
+    <div class="sec-head">
+      <span class="sec-tag">stack</span>
+      <h2 class="sec-title">What I build with</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h4>Languages &amp; Querying</h4>
+        <p>Python, SQL, HTML, CSS, JavaScript</p>
+      </div>
+      <div class="skill-card">
+        <h4>Libraries &amp; Frameworks</h4>
+        <p>Pandas, NumPy, Scikit-learn, XGBoost, Flask, Matplotlib, Seaborn</p>
+      </div>
+      <div class="skill-card">
+        <h4>Machine Learning</h4>
+        <p>Logistic Regression, Decision Trees, Random Forest, Feature Engineering, EDA, Model Evaluation</p>
+      </div>
+      <div class="skill-card">
+        <h4>Tools &amp; Platforms</h4>
+        <p>Git, MySQL, Jupyter Notebook, REST APIs, FastAPI, Postman</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap reveal">
+    <div class="sec-head">
+      <span class="sec-tag">03 repos</span>
+      <h2 class="sec-title">Things I've shipped</h2>
+    </div>
+
+    <div class="project">
+      <div class="project-head">
+        <div>
+          <div class="project-title">Crash Severity Prediction</div>
+          <div class="project-kicker">classification &middot; tabular data &middot; feature importance</div>
+        </div>
+        <a class="project-link" href="https://github.com/LaxmiShigli/Crash-Severity-Prediction" target="_blank" rel="noopener">View code ↗</a>
+      </div>
+      <div class="project-body">
+        <ul>
+          <li>Built a machine learning pipeline to predict road accident severity from historical crash data — data cleaning, feature engineering, and exploratory data analysis.</li>
+          <li>Trained and compared Logistic Regression, Decision Tree, Random Forest, and XGBoost classifiers to identify the best-performing model.</li>
+          <li>Applied feature importance analysis to surface the key factors driving accident severity.</li>
+        </ul>
+        <div class="tech-row">
+          <span class="tech-pill">Python</span><span class="tech-pill">Pandas</span><span class="tech-pill">Scikit-learn</span><span class="tech-pill">XGBoost</span><span class="tech-pill">Matplotlib</span><span class="tech-pill">Seaborn</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-head">
+        <div>
+          <div class="project-title">AI Ad Copy Generator</div>
+          <div class="project-kicker">generative AI &middot; API integration &middot; Flask</div>
+        </div>
+        <a class="project-link" href="https://github.com/LaxmiShigli/AI-Ad-Copy-Generator" target="_blank" rel="noopener">View code ↗</a>
+      </div>
+      <div class="project-body">
+        <ul>
+          <li>Built an AI-driven marketing content generator using the Grok AI and Unsplash APIs to produce ad headlines, descriptions, and promotional copy from user inputs.</li>
+          <li>Integrated automated image recommendations alongside generated text to improve ad creativity and visual engagement.</li>
+          <li>Developed a responsive Flask web interface for real-time, API-based content generation.</li>
+        </ul>
+        <div class="tech-row">
+          <span class="tech-pill">Python</span><span class="tech-pill">Flask</span><span class="tech-pill">Grok AI API</span><span class="tech-pill">Unsplash API</span><span class="tech-pill">HTML/CSS</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-head">
+        <div>
+          <div class="project-title">Weather Forecasting Application</div>
+          <div class="project-kicker">frontend &middot; async data &middot; real-time API</div>
+        </div>
+        <a class="project-link" href="https://github.com/LaxmiShigli/Weather-App" target="_blank" rel="noopener">View code ↗</a>
+      </div>
+      <div class="project-body">
+        <ul>
+          <li>Developed a mobile-friendly weather forecasting app using the OpenWeatherMap API to deliver real-time weather updates.</li>
+          <li>Implemented asynchronous data fetching (Fetch API, Async/Await) and dynamic DOM manipulation for live weather display.</li>
+          <li>Used Local Storage to persist user preferences and improve repeat-visit experience.</li>
+        </ul>
+        <div class="tech-row">
+          <span class="tech-pill">JavaScript</span><span class="tech-pill">OpenWeatherMap API</span><span class="tech-pill">Fetch API</span><span class="tech-pill">DOM</span><span class="tech-pill">Local Storage</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap reveal">
+    <div class="sec-head">
+      <span class="sec-tag">log</span>
+      <h2 class="sec-title">Experience &amp; certifications</h2>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">Internship</div>
+      <div>
+        <div class="tl-role">AI &amp; Machine Learning Intern</div>
+        <div class="tl-org">Contriver</div>
+        <div class="tl-desc">Worked on applied ML tasks as part of a project team, contributing to model development and data preparation workflows.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Cert.</div>
+      <div>
+        <div class="tl-role">Python and Machine Learning</div>
+        <div class="tl-org">Contriver</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Cert.</div>
+      <div>
+        <div class="tl-role">Foundational Training Program — Infosys Springboard</div>
+        <div class="tl-org">Infosys</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Beyond<br>the desk</div>
+      <div>
+        <div class="tl-desc">Presented a paper on Amazon Go at a college-level event &middot; Served as team head for internship project deliverables &middot; Coordinated at a National Level Hackathon and an ISRO Space Event &middot; Python Quiz Competition &amp; Java Basics workshop.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap reveal">
+    <div class="sec-head">
+      <span class="sec-tag">edu</span>
+      <h2 class="sec-title">Education</h2>
+    </div>
+    <div class="edu-item">
+      <div>
+        <div class="edu-name">Smt. Kamala and Sri Venkappa M. Agadi College, Laxmeshwar</div>
+        <div class="edu-degree">B.Tech. in Computer Science and Engineering</div>
+      </div>
+      <div class="edu-meta">Dec 2022 – May 2026<br>CGPA: 8.2 / 10</div>
+    </div>
+    <div class="edu-item">
+      <div>
+        <div class="edu-name">Vidyaniketan PU Science College, Hubli</div>
+        <div class="edu-degree">Pre-University Course (12th Grade)</div>
+      </div>
+      <div class="edu-meta">Jul 2021 – Apr 2022<br>87.5%</div>
+    </div>
+    <div class="edu-item">
+      <div>
+        <div class="edu-name">Adarsha Central School, Byadgi</div>
+        <div class="edu-degree">SSLC (10th Grade)</div>
+      </div>
+      <div class="edu-meta">Jun 2020 – May 2021<br>79.2%</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="border-bottom: none;">
+  <div class="wrap">
+    <div class="contact-cell reveal">
+      <div class="typed-out">Let's build something together.</div>
+      <p class="hero-sub" style="margin:0 auto 26px; text-align:center;">Open to AI/ML Engineer and Data Analyst roles — happy to walk through any project in detail.</p>
+      <div class="contact-actions">
+        <a class="btn btn-primary" href="mailto:laxmishigli@gmail.com">laxmishigli@gmail.com</a>
+        <a class="btn btn-ghost" href="https://github.com/LaxmiShigli" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/laxmi-shigli-a1b03924b" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>+91 9606785567 &nbsp;·&nbsp; Karnataka, India</footer>
+
+<script>
+  // Typing effect for hero
+  const text = "Hi, I'm Laxmi — I build with data.";
+  const el = document.getElementById('typed-text');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (reduceMotion) {
+    el.textContent = text;
+  } else {
+    let i = 0;
+    el.innerHTML = '<span class="cursor">&nbsp;</span>';
+    function type() {
+      if (i <= text.length) {
+        el.innerHTML = text.slice(0, i) + '<span class="cursor">&nbsp;</span>';
+        i++;
+        setTimeout(type, 38);
+      } else {
+        // typing finished — remove the cursor
+        el.textContent = text;
+      }
+    }
+    setTimeout(type, 400);
+  }
+
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Scroll-spy: highlight the nav link for whichever section is currently in view
+  const navLinks = Array.from(document.querySelectorAll('.nav-links a'));
+  const spySections = navLinks
+    .map(link => document.querySelector(link.getAttribute('href')))
+    .filter(Boolean);
+
+  function setActiveLink(id) {
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+    });
+  }
+
+  const spyObserver = new IntersectionObserver((entries) => {
+    // pick the entry closest to the top of the viewport among the ones currently intersecting
+    const visible = entries.filter(e => e.isIntersecting);
+    if (visible.length > 0) {
+      const topMost = visible.reduce((a, b) =>
+        a.boundingClientRect.top < b.boundingClientRect.top ? a : b
+      );
+      setActiveLink(topMost.target.id);
+    }
+  }, { rootMargin: '-72px 0px -55% 0px', threshold: 0 });
+
+  spySections.forEach(sec => spyObserver.observe(sec));
+
+  // Fallback for mailto links: if no mail client opens (common in app previews/sandboxes),
+  // copy the email to clipboard and show quick confirmation instead of doing nothing.
+  document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const email = link.getAttribute('href').replace('mailto:', '');
+      const originalText = link.textContent;
+      // Let the mailto attempt fire normally; also copy as a safety net.
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(email).then(() => {
+          link.textContent = 'Copied: ' + email;
+          setTimeout(() => { link.textContent = originalText; }, 1800);
+        }).catch(() => {});
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
